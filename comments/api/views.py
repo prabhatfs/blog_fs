@@ -26,7 +26,8 @@ from comments.models import Comment
 from .serializers import (
     CommentListSerializer,
     CommentDetailSerializer,
-    create_comment_serializer
+    create_comment_serializer,
+    CommentUpdateSerializer
     )
 
 
@@ -60,11 +61,10 @@ class CommentDetailAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView)
         return self.destroy(request, *args, **kwargs)
 
 
-"""
-class PostUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostCreateUpdateSerializer
-    lookup_field = 'slug'
+class CommentUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentUpdateSerializer
+    # lookup_field = 'id'
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     #lookup_url_kwarg = "abc"
     def perform_update(self, serializer):
@@ -72,14 +72,12 @@ class PostUpdateAPIView(RetrieveUpdateAPIView):
         #email send_email
 
 
-
-class PostDeleteAPIView(DestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostDetailSerializer
-    lookup_field = 'slug'
+class CommentDeleteAPIView(DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentDetailSerializer
+    #lookup_field = 'id'
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-    #lookup_url_kwarg = "abc"
-"""
+
 
 class CommentListAPIView(ListAPIView):
     serializer_class = CommentListSerializer

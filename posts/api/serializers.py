@@ -58,6 +58,7 @@ class PostDetailSerializer(ModelSerializer):
 class PostListSerializer(ModelSerializer):
     url = post_detail_url
     user = UserDetailSerializer(read_only=True)
+    comments = SerializerMethodField()
     class Meta:
         model = Post
         fields = [

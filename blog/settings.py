@@ -25,7 +25,7 @@ SECRET_KEY = '*j0p&1!p3)bejje%&)qo7h429d=+lpefh(l%9&8q&ah#*(n-kq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'1d439c54.ngrok.io', u'127.0.0.1', u'localhost']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -162,4 +162,9 @@ CORS_ALLOW_HEADERS = (
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+)
+
+
+CORS_ORIGIN_WHITELIST = (
+    '1d439c54.ngrok.io',
 )

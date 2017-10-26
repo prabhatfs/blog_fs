@@ -63,6 +63,14 @@ def create_comment_serializer(model_type='post', slug=None, parent_id=None, user
     return CommentCreateSerializer
 
 
+class CommentUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'content'
+        ]
+
+
 
 class CommentSerializer(ModelSerializer):
     reply_count = SerializerMethodField()
