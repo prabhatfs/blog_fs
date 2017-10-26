@@ -20,6 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/posts/', include('posts.api.urls', namespace='posts-api')),
     url(r'^api/users/', include("accounts.api.urls", namespace='users-api')),
-    #url(r'^api/comments/', include("comments.api.urls", namespace='comments-api')),
+    url(r'^api/comments/', include("comments.api.urls", namespace='comments-api')),
     url(r'^api/posts/', include("posts.api.urls", namespace='posts-api')),
 ]

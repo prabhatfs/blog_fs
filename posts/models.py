@@ -9,8 +9,9 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
-
 from markdown import markdown
+
+from comments.models import Comment
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
@@ -44,6 +45,11 @@ class Post(models.Model):
         content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
 
+    @property
+    def comments(self):
+    	instance = self
+    	qs = Comment.objects.filter_by_instance(instance)
+    	return qs
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)

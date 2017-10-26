@@ -6,8 +6,10 @@ from rest_framework.serializers import (
 
 
 from accounts.api.serializers import UserDetailSerializer
+from comments.api.serializers import CommentSerializer
 
 from posts.models import Post
+from comments.models import Comment
 
 
 class PostCreateUpdateSerializer(ModelSerializer):
@@ -29,6 +31,7 @@ class PostDetailSerializer(ModelSerializer):
     url = post_detail_url
     user = UserDetailSerializer(read_only=True)
     html = SerializerMethodField()
+    comments = SerializerMethodField()
 
     class Meta:
         model = Post
@@ -41,10 +44,16 @@ class PostDetailSerializer(ModelSerializer):
             'content',
             'html',
             'timestamp',
+            'comments'
         ]
 
     def get_html(self, obj):
         return obj.get_markdown()
+
+    def get_comments(self, obj):
+        c_qs = Comment.objects.filter_by_instance(obj)
+        comments = CommentSerializer(c_qs, many=True).data
+        return comments
 
 class PostListSerializer(ModelSerializer):
     url = post_detail_url
